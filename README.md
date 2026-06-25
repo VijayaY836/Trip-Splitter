@@ -1,44 +1,88 @@
-# SplitTab — Beautiful Bill Splitting
+# SplitTab ✈️💸
 
- SplitTab (a.k.a. Trip Splitter) — a lightweight, delightful web app for tracking shared expenses on trips and events.
+### Beautiful Bill Splitting for Trips, Adventures, and the Occasional Financial Disaster
 
-SplitTab makes logging payments, splitting them among any subset of participants, and calculating minimal settlement transfers simple and friendly. It ships as a client-side React app (Vite) so you can run locally or deploy a static bundle.
+Ever returned from a trip with 47 screenshots of payments, three different UPI histories, and a group chat argument that started with:
+
+> "Wait... who paid for dinner on Day 2?"
+
+SplitTab exists to prevent that.
+
+SplitTab (formerly *Trip Splitter*) is a lightweight, delightful web app that helps friends track shared expenses, split costs fairly, and settle up without requiring a degree in accounting—or diplomacy.
+
+Built with React and Vite, it runs entirely in the browser and can be deployed anywhere static sites are supported.
 
 ---
 
-## Why SplitTab
+## Why SplitTab?
 
-- Fast, focused UI for real-time bill splitting and balances
-- Split on a per-payment basis (choose who shares each expense)
-- Computes minimal set of transfers to settle debts
-- Lightweight: Vite + React, no backend required for the core experience
-- Easy to customize — replace `src/assets/bg.png` to change the app backdrop
+Because friendships should survive vacations.
+
+SplitTab lets you:
+
+✅ Log expenses in seconds
+✅ Split bills among any subset of participants
+✅ See balances update instantly
+✅ Generate the minimum number of settlement payments
+✅ Stop arguing about who owes ₹347.83
+
+No backend. No accounts. No spreadsheets. No suffering.
 
 ---
 
 ## Features
 
-- Add participants and log payments with descriptions
-- Select any subset of trip members to split a payment with
-- Live balances panel with avatar colors
-- Reverse chronological payment feed (each payment is shown as a tidy white card)
-- Settlement screen computes who pays whom with minimal transfers
+### 👥 Add Participants
+
+Create your trip group in seconds.
+
+### 💳 Log Payments
+
+Record who paid, how much they paid, and what it was for.
+
+### 🎯 Flexible Splitting
+
+Not everyone joined every activity—and that's okay.
+
+Split expenses among any subset of participants instead of forcing everyone into every bill.
+
+### 📊 Live Balances
+
+Watch balances update instantly as expenses are added.
+
+Colorful avatars make it easy to see who's funding the adventure and who's quietly accumulating debt.
+
+### 🧾 Payment Timeline
+
+All expenses appear in a clean reverse-chronological feed so you can easily revisit what happened.
+
+### 🤝 Smart Settlements
+
+When the trip ends, SplitTab calculates the smallest set of transfers needed to settle everything.
+
+Less math. Fewer transactions. More peace.
 
 ---
 
-## Tech stack
+## Tech Stack
 
-- React 19
-- Vite for dev + bundling
-- Plain CSS (single `src/App.css`) and componentized UI in `src/components`
+Built with:
+
+* React 19
+* Vite
+* Plain CSS
+* A healthy dislike of manual expense calculations
 
 ---
 
-## Quick start
+## Quick Start
 
-Prerequisites: Node.js 18+ and npm
+### Prerequisites
 
-Install and run locally:
+* Node.js 18+
+* npm
+
+### Run Locally
 
 ```bash
 cd trip-splitter
@@ -46,9 +90,9 @@ npm install
 npm run dev
 ```
 
-Open the dev server at the URL Vite prints (commonly `http://localhost:5173`).
+Open the URL printed by Vite (usually `http://localhost:5173`).
 
-Build for production:
+### Production Build
 
 ```bash
 npm run build
@@ -57,57 +101,143 @@ npm run preview
 
 ---
 
-## Project layout
+## Project Structure
 
-- `index.html` — app entry
-- `src/main.jsx` — app bootstrap (renders `<App />`)
-- `src/App.jsx` — top-level routing between setup / trip / settlement phases
-- `src/App.css` — global styles, design tokens and translucency variable `--panel-bg`
-- `src/components/SetUp.jsx` — participant entry UI
-- `src/components/Trip.jsx` — payments, balances and logging UI
-- `src/components/Settlement.jsx` — final settlement instructions and transfers
-- `src/utils/splitLogic.js` — balance computation and settlement algorithm
-- `src/assets/bg.png` — main background image (replaceable)
+```text
+index.html
+src/
+├── main.jsx
+├── App.jsx
+├── App.css
+├── assets/
+│   └── bg.png
+├── components/
+│   ├── SetUp.jsx
+│   ├── Trip.jsx
+│   └── Settlement.jsx
+└── utils/
+    └── splitLogic.js
+```
+
+### Key Files
+
+* `src/App.jsx` — controls the overall application flow
+* `src/components/SetUp.jsx` — participant setup
+* `src/components/Trip.jsx` — expense tracking and balances
+* `src/components/Settlement.jsx` — final settlement calculations
+* `src/utils/splitLogic.js` — the magical accounting brain
+* `src/assets/bg.png` — replace this to give the app your own vibe
 
 ---
 
-## Background & appearance
+## Make It Yours
 
-- Replace `src/assets/bg.png` with your artwork to change the app background.
-- Panel translucency is controlled by `--panel-bg` in `src/App.css`. Increase alpha for more opaque cards or lower it to reveal the backdrop.
-- The right-side form column intentionally stays white to preserve input contrast while other panels remain translucent.
+### 🎨 Background
+
+Replace:
+
+```text
+src/assets/bg.png
+```
+
+with your own image.
+
+Beach trip?
+Mountain trek?
+Corporate retreat?
+Questionable bachelor party?
+
+The choice is yours.
+
+### ✨ Panel Transparency
+
+The translucency of most panels is controlled by:
+
+```css
+--panel-bg
+```
+
+inside `src/App.css`.
+
+Increase opacity for cleaner readability or lower it to let your background shine through.
 
 ---
 
-## How settlement works (brief)
+## How Settlement Works
 
-Each payment records a `payer`, an `amount`, and a `splitWith` list. Balances are computed by assigning equal shares to all participants of that payment. The settlement step runs a simple greedy matching algorithm to pair debtors and creditors into transfers that clear balances with minimal transactions.
+Every payment stores:
 
-See `src/utils/splitLogic.js` for the implementation.
+* who paid
+* how much they paid
+* who shared the expense
+
+Each expense is divided equally among the selected participants.
+
+Once all expenses are entered, SplitTab computes everyone's net balance and runs a greedy matching algorithm to determine the smallest practical set of transfers required to settle all debts.
+
+In short:
+
+> The app does the math so your group doesn't have to.
+
+See:
+
+```text
+src/utils/splitLogic.js
+```
+
+for implementation details.
 
 ---
 
 ## Contributing
 
-Contributions are welcome. Suggested workflow:
+Found a bug?
 
-1. Fork the repo and create a branch for your feature/fix
-2. Make your changes and add concise commit messages
-3. Open a pull request with screenshots and a short description
+Have an idea?
+
+Want to improve the UI?
+
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Open a pull request
+5. Accept our eternal gratitude
+
+Bonus points for screenshots.
 
 ---
 
-## Deployment suggestions
+## Deployment
 
-- The project produces a static bundle via `npm run build` — host on Netlify, Vercel, GitHub Pages, or any static host.
-- For public deployments, remove any development-only debug code and ensure `bg.png` is optimized for web.
+SplitTab generates a static build and can be deployed almost anywhere:
+
+* Netlify
+* Vercel
+* GitHub Pages
+* Any static hosting provider
+
+Before deploying publicly:
+
+* Remove development-only code
+* Optimize background assets
+* Test on mobile devices
 
 ---
 
 ## License
 
-MIT. Use and adapt freely.
+MIT License.
+
+Build on it.
+Customize it.
+Share it.
+
+Just don't make your friends calculate settlements manually.
 
 ---
 
-Enjoy splitting!
+### One Trip. One Ledger. Zero Arguments.
+
+Happy splitting. 🚀
