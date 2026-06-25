@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Setup from "./components/Setup";
+import Setup from "./components/SetUp";
 import Trip from "./components/Trip";
 import Settlement from "./components/Settlement";
 import "./App.css";
